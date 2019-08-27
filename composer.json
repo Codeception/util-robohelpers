@@ -1,0 +1,20 @@
+{
+    "name": "codeception/util-robohelpers",
+    "description": "Helper methods for Robo files",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gintautas Miselis",
+            "email": "gintautas@miselis.lt"
+        }
+    ],
+    "minimum-stability": "RC",
+    "require": {},
+    "autoload":{
+        "classmap": ["src/"]
+    },
+    "config": {
+        "classmap-authoritative": true
+    }
+}
