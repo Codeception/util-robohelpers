@@ -3,6 +3,7 @@
 
 namespace Codeception\Util;
 
+use Codeception\Lib\ModuleContainer;
 
 trait DocumentationHelpers
 {
@@ -15,9 +16,28 @@ trait DocumentationHelpers
     protected function generateDocumentationForClass($className, $documentationFile, $sourceMessage = '')
     {
         $moduleName = (new \ReflectionClass($className))->getShortName();
+
+        if (isset(ModuleContainer::$packages[$moduleName])) {
+            $packageName = ModuleContainer::$packages[$moduleName];
+        } else {
+            $packageName = 'codeception/module-' . strtolower($moduleName);
+        }
+
+        $installationHtml =<<<EOT
+# $moduleName
+## Installation
+
+This module was bundled with Codeception 2 and 3, but since version 4 it is necessary to install it separately 
+by running `composer require --dev codeception/$packageName` in project directory 
+or enabling `$moduleName` module in suite configuration file and running `codecept init upgrade4`.
+
+## Description
+
+EOT;
+
         $this->taskGenDoc($documentationFile)
             ->docClass($className)
-            ->prepend('# ' . $moduleName)
+            ->prepend($installationHtml)
             ->append($sourceMessage)
             ->processClassSignature(false)
             ->processClassDocBlock(function (\ReflectionClass $c, $text) {
