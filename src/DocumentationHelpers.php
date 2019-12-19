@@ -36,7 +36,7 @@ composer require --dev codeception/$packageName
 Alternatively, you can enable `$moduleName` module in suite configuration file and run
  
 ```
-codecept init upgrade4.
+codecept init upgrade4
 ```
 
 This module was bundled with Codeception 2 and 3, but since version 4 it is necessary to install it separately.   
