@@ -3,6 +3,7 @@
 
 namespace Codeception\Util;
 
+use Codeception\Lib\ModuleContainer;
 
 trait DocumentationHelpers
 {
@@ -15,9 +16,40 @@ trait DocumentationHelpers
     protected function generateDocumentationForClass($className, $documentationFile, $sourceMessage = '')
     {
         $moduleName = (new \ReflectionClass($className))->getShortName();
+
+        if (isset(ModuleContainer::$packages[$moduleName])) {
+            $packageName = ModuleContainer::$packages[$moduleName];
+        } else {
+            $packageName = 'codeception/module-' . strtolower($moduleName);
+        }
+
+        $installationHtml =<<<EOT
+# $moduleName
+## Installation
+
+If you use Codeception installed using composer, install this module with the following command:
+
+```
+composer require --dev codeception/$packageName
+```
+
+Alternatively, you can enable `$moduleName` module in suite configuration file and run
+ 
+```
+codecept init upgrade4
+```
+
+This module was bundled with Codeception 2 and 3, but since version 4 it is necessary to install it separately.   
+Some modules are bundled with PHAR files.  
+Warning. Using PHAR file and composer in the same project can cause unexpected errors.  
+
+## Description
+
+EOT;
+
         $this->taskGenDoc($documentationFile)
             ->docClass($className)
-            ->prepend('# ' . $moduleName)
+            ->prepend($installationHtml)
             ->append($sourceMessage)
             ->processClassSignature(false)
             ->processClassDocBlock(function (\ReflectionClass $c, $text) {
