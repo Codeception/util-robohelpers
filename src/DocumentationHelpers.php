@@ -100,7 +100,7 @@ EOT;
                 );
                 $text   = str_replace('@part ', ' * `[Part]` ', $text);
                 $text   = str_replace("@return mixed\n", '', $text);
-                $text   = preg_replace('~@return (.*?)~', ' * `return` $1', $text);
+                $text   = preg_replace('~@(return( [^\s]*)?)( (.+))?~', ' * `$1` $4', $text);
                 $text   = preg_replace("~^@(.*?)([$\s])~", ' * `$1` $2', $text);
                 $result = $title . $text;
                 return preg_replace('/\n(\s*\n){2,}/', "\n\n", $result);
