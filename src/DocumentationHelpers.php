@@ -39,9 +39,6 @@ Alternatively, you can enable `$moduleName` module in suite configuration file a
 codecept init upgrade4
 ```
 
-Some modules are bundled with PHAR files.  
-Warning. Using PHAR file and composer in the same project can cause unexpected errors.  
-
 ## Description
 
 EOT;
