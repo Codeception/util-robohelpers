@@ -27,16 +27,8 @@ trait DocumentationHelpers
 # $moduleName
 ## Installation
 
-If you use Codeception installed using composer, install this module with the following command:
-
 ```
 composer require --dev $packageName
-```
-
-Alternatively, you can enable `$moduleName` module in suite configuration file and run
- 
-```
-codecept init upgrade4
 ```
 
 ## Description
